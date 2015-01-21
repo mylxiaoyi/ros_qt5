@@ -31,7 +31,8 @@
 # POSSIBILITY OF SUCH DAMAGE.
 
 from python_qt_binding.QtCore import Slot, QMimeData, QModelIndex, Qt, qWarning
-from python_qt_binding.QtGui import QAction, QDrag, QHeaderView, QIcon, QMenu, QTreeView
+from python_qt_binding.QtWidgets import QAction, QHeaderView, QMenu, QTreeView
+from python_qt_binding.QtGui import QDrag, QIcon
 
 
 class MessageTreeWidget(QTreeView):
@@ -41,7 +42,7 @@ class MessageTreeWidget(QTreeView):
         self.setDragEnabled(True)
         self.sortByColumn(0, Qt.AscendingOrder)
 
-        self.header().setResizeMode(QHeaderView.ResizeToContents)
+        self.header().setSectionResizeMode(QHeaderView.ResizeToContents)
         self.header().setContextMenuPolicy(Qt.CustomContextMenu)
         self.header().customContextMenuRequested.connect(self.handle_header_view_customContextMenuRequested)
 
