@@ -32,7 +32,7 @@
 #
 # Author: Isaac Saito, Ze'ev Klapow
 
-from python_qt_binding.QtGui import QTextEdit
+from python_qt_binding.QtWidgets import QTextEdit
 
 
 class StatusSnapshot(QTextEdit):

@@ -33,7 +33,7 @@
 # Author: Isaac Saito, Ze'ev Klapow
 
 from python_qt_binding.QtCore import Signal
-from python_qt_binding.QtGui import QPushButton, QTextEdit, QVBoxLayout
+from python_qt_binding.QtWidgets import QPushButton, QTextEdit, QVBoxLayout
 import rospy
 
 from rqt_robot_monitor.abst_status_widget import AbstractStatusWidget

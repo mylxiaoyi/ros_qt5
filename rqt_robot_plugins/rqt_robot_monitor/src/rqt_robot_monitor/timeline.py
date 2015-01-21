@@ -35,8 +35,8 @@
 import rospy
 
 from python_qt_binding.QtCore import QPointF, Signal
-from python_qt_binding.QtGui import (QColor, QGraphicsPixmapItem,
-                                     QGraphicsView, QIcon)
+from python_qt_binding.QtWidgets import (QGraphicsPixmapItem, QGraphicsView)
+from python_qt_binding.QtGui import QColor, QIcon
 
 
 class TimelineView(QGraphicsView):
