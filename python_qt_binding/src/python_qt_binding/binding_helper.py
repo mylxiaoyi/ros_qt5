@@ -55,7 +55,8 @@ def _select_qt_binding(binding_name=None, binding_order=None):
 
     required_modules = [
         'QtCore',
-        'QtGui'
+        'QtGui',
+        'QtWidgets'
     ]
     optional_modules = [
         'QtDeclarative',
@@ -131,11 +132,14 @@ def _load_pyqt(required_modules, optional_modules):
     except ValueError as e:
         raise RuntimeError('Could not set API version (%s): did you import PyQt4 directly?' % e)
 
+
     # register required and optional PyQt4 modules
     for module_name in required_modules:
-        _named_import('PyQt4.%s' % module_name)
+        #_named_import('PyQt4.%s' % module_name)
+        _named_import('PyQt5.%s' % module_name)
     for module_name in optional_modules:
-        _named_optional_import('PyQt4.%s' % module_name)
+        #_named_optional_import('PyQt4.%s' % module_name)
+        _named_optional_import('PyQt5.%s' % module_name)
 
     # set some names for compatibility with PySide
     sys.modules['QtCore'].Signal = sys.modules['QtCore'].pyqtSignal
@@ -152,16 +156,20 @@ def _load_pyqt(required_modules, optional_modules):
     global _loadUi
 
     def _loadUi(uifile, baseinstance=None, custom_widgets_=None):
-        from PyQt4 import uic
+        #from PyQt4 import uic
+        from PyQt5 import uic
         return uic.loadUi(uifile, baseinstance=baseinstance)
 
     # override specific function to improve compatibility between different bindings
-    from QtGui import QFileDialog
-    QFileDialog.getOpenFileName = QFileDialog.getOpenFileNameAndFilter
-    QFileDialog.getSaveFileName = QFileDialog.getSaveFileNameAndFilter
+    #from QtGui import QFileDialog
+    #from PyQt5.QtWidgets import QFileDialog
+    #QFileDialog.getOpenFileName = QFileDialog.getOpenFileNameAndFilter
+    #QFileDialog.getSaveFileName = QFileDialog.getSaveFileNameAndFilter
 
-    import PyQt4.QtCore
-    return PyQt4.QtCore.PYQT_VERSION_STR
+    #import PyQt4.QtCore
+    #return PyQt4.QtCore.PYQT_VERSION_STR
+    import PyQt5.QtCore
+    return PyQt5.QtCore.PYQT_VERSION_STR
 
 
 def _load_pyside(required_modules, optional_modules):

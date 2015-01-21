@@ -14,8 +14,9 @@ catkin_package(
 )
 catkin_python_setup()
 
-find_package(Qt4 COMPONENTS QtCore QtGui REQUIRED)
-include(${QT_USE_FILE})
+#find_package(Qt4 COMPONENTS QtCore QtGui REQUIRED)
+find_package(Qt5 COMPONENTS Widgets REQUIRED)
+#include(${QT_USE_FILE})
 
 set(rqt_rviz_SRCS
   src/rqt_rviz/rviz.cpp
@@ -25,11 +26,11 @@ set(rqt_rviz_HDRS
   include/rqt_rviz/rviz.h
 )
 
-qt4_wrap_cpp(rqt_rviz_MOCS ${rqt_rviz_HDRS})
+qt5_wrap_cpp(rqt_rviz_MOCS ${rqt_rviz_HDRS})
 
 include_directories(include ${catkin_INCLUDE_DIRS})
 add_library(${PROJECT_NAME} ${rqt_rviz_SRCS} ${rqt_rviz_MOCS})
-target_link_libraries(${PROJECT_NAME} ${catkin_LIBRARIES} ${QT_QTCORE_LIBRARY} ${QT_QTGUI_LIBRARY} ${Boost_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} ${catkin_LIBRARIES} ${Qt5Widgets_LIBRARIES} ${Boost_LIBRARIES})
 
 find_package(class_loader)
 class_loader_hide_library_symbols(${PROJECT_NAME})

@@ -43,7 +43,8 @@ if QT_BINDING == 'pyside':
         raise ImportError('A PySide version newer than 1.1.0 is required.')
 
 from python_qt_binding.QtCore import Slot, Qt, qWarning, Signal
-from python_qt_binding.QtGui import QWidget, QVBoxLayout, QSizePolicy, QColor
+from python_qt_binding.QtWidgets import QWidget, QVBoxLayout, QSizePolicy
+from python_qt_binding.QtGui import QColor
 
 import operator
 import matplotlib
@@ -51,15 +52,15 @@ if matplotlib.__version__ < '1.1.0':
     raise ImportError('A newer matplotlib is required (at least 1.1.0)')
 
 try:
-    from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg as FigureCanvas
+    from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 except ImportError:
     # work around bug in dateutil
     import sys
     import thread
     sys.modules['_thread'] = thread
-    from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg as FigureCanvas
+    from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 # from matplotlib.backends.backend_qt4agg import NavigationToolbar2QTAgg as NavigationToolbar
-from matplotlib.backends.backend_qt4agg import NavigationToolbar2QT as NavigationToolbar
+from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
 from matplotlib.figure import Figure
 
 import numpy
