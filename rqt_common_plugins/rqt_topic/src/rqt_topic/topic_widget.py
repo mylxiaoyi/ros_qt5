@@ -35,7 +35,8 @@ import os
 
 from python_qt_binding import loadUi
 from python_qt_binding.QtCore import Qt, QTimer, Signal, Slot
-from python_qt_binding.QtGui import QHeaderView, QIcon, QMenu, QTreeWidgetItem, QWidget
+from python_qt_binding.QtWidgets import QHeaderView, QMenu, QTreeWidgetItem, QWidget
+from python_qt_binding.QtGui import QIcon
 import roslib
 import rospkg
 import rospy
@@ -78,7 +79,7 @@ class TopicWidget(QWidget):
         self._plugin = plugin
         self.topics_tree_widget.sortByColumn(0, Qt.AscendingOrder)
         header = self.topics_tree_widget.header()
-        header.setResizeMode(QHeaderView.ResizeToContents)
+        header.setSectionResizeMode(QHeaderView.ResizeToContents)
         header.customContextMenuRequested.connect(self.handle_header_view_customContextMenuRequested)
         header.setContextMenuPolicy(Qt.CustomContextMenu)
 
