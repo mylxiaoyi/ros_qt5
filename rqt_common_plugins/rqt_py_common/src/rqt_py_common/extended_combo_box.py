@@ -31,7 +31,7 @@
 # POSSIBILITY OF SUCH DAMAGE.
 
 from python_qt_binding.QtCore import Qt, Signal, Slot
-from python_qt_binding.QtGui import QComboBox, QCompleter, QSortFilterProxyModel
+from python_qt_binding.QtWidgets import QComboBox, QCompleter, QSortFilterProxyModel
 
 
 class ExtendedComboBox(QComboBox):
