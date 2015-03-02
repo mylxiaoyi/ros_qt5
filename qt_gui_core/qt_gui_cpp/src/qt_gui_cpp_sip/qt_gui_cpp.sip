@@ -1,7 +1,8 @@
-%Module libqt_gui_cpp_sip 1
+%Module(name=libqt_gui_cpp_sip, version=1)
 
 %Import QtCore/QtCoremod.sip
 %Import QtGui/QtGuimod.sip
+%Import QtWidgets/QtWidgetsmod.sip
 
 %DefaultSupertype sip.simplewrapper
 

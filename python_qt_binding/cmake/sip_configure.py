@@ -2,7 +2,8 @@ import os
 import re
 import subprocess
 import sys
-from PyQt4 import pyqtconfig
+from PyQt5 import QtCore 
+import sipconfig
 
 if len(sys.argv) != 8:
     print('usage: %s build-dir sip-file output_dir include_dirs libs lib_dirs ldflags' % sys.argv[0])
@@ -15,12 +16,12 @@ build_dir, sip_file, output_dir, include_dirs, libs, lib_dirs, ldflags = sys.arg
 build_file = 'pyqtscripting.sbf'
 
 # Get the PyQt configuration information.
-config = pyqtconfig.Configuration()
+config = sipconfig.Configuration()
 
 # Get the extra SIP flags needed by the imported qt module.  Note that
 # this normally only includes those flags (-x and -t) that relate to SIP's
 # versioning system.
-qt_sip_flags = config.pyqt_sip_flags
+qt_sip_flags = QtCore.PYQT_CONFIGURATION['sip_flags']
 
 try:
     os.makedirs(build_dir)
@@ -33,7 +34,7 @@ cmd = [
     config.sip_bin,
     '-c', build_dir,
     '-b', os.path.join(build_dir, build_file),
-    '-I', config.pyqt_sip_dir,
+    '-I', os.path.join(config.default_sip_dir, 'PyQt5'),
     '-w'
 ]
 cmd += qt_sip_flags.split(' ')
@@ -43,21 +44,21 @@ subprocess.check_call(cmd)
 # Create the Makefile.  The QtModuleMakefile class provided by the
 # pyqtconfig module takes care of all the extra preprocessor, compiler and
 # linker flags needed by the Qt library.
-makefile = pyqtconfig.QtGuiModuleMakefile(
-    dir=build_dir,
+makefile = sipconfig.SIPModuleMakefile(
     configuration=config,
-    build_file=build_file
+    build_file=build_file,
+    dir=build_dir
 )
 
 # hack to override makefile behavior which always prepend -l to libraries which is wrong for absolute paths
-default_platform_lib_function = pyqtconfig.QtGuiModuleMakefile.platform_lib
+default_platform_lib_function = sipconfig.SIPModuleMakefile.platform_lib
 
 
 def custom_platform_lib_function(self, clib, framework=0):
     if os.path.isabs(clib):
         return clib
     return default_platform_lib_function(self, clib, framework)
-pyqtconfig.QtGuiModuleMakefile.platform_lib = custom_platform_lib_function
+sipconfig.SIPModuleMakefile.platform_lib = custom_platform_lib_function
 
 
 # split paths on whitespace
@@ -75,7 +76,7 @@ for lib_dir in split_paths(lib_dirs):
     lib_dir = lib_dir.replace('\\', '')
     makefile.extra_lib_dirs.append(lib_dir)
 for ldflag in ldflags.split('\\ '):
-    makefile.LFLAGS.append(ldflag)
+    makefile.extra_lflags.append(ldflag)
 
 # redirect location of generated library
 makefile._target = '"%s"' % os.path.join(output_dir, makefile._target)

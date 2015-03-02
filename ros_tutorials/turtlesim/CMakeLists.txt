@@ -3,8 +3,8 @@ project(turtlesim)
 
 find_package(catkin REQUIRED COMPONENTS geometry_msgs message_generation rosconsole roscpp roscpp_serialization roslib rostime std_msgs std_srvs)
 
-find_package(Qt4 4.6 REQUIRED COMPONENTS QtCore QtGui)
-include(${QT_USE_FILE})
+find_package(Qt5 REQUIRED COMPONENTS Widgets)
+#include(${QT_USE_FILE})
 find_package(Boost REQUIRED COMPONENTS thread)
 
 include_directories(include ${catkin_INCLUDE_DIRS} ${Boost_INCLUDE_DIRS} ${QT_INCLUDE_DIRS})
@@ -31,11 +31,11 @@ set(turtlesim_node_HDRS
   include/turtlesim/turtle_frame.h
 )
 
-qt4_wrap_cpp(turtlesim_node_MOCS ${turtlesim_node_HDRS})
+qt5_wrap_cpp(turtlesim_node_MOCS ${turtlesim_node_HDRS})
 
 
 add_executable(turtlesim_node ${turtlesim_node_SRCS} ${turtlesim_node_MOCS})
-target_link_libraries(turtlesim_node ${QT_LIBRARIES} ${catkin_LIBRARIES} ${Boost_LIBRARIES})
+target_link_libraries(turtlesim_node ${Qt5Widgets_LIBRARIES} ${catkin_LIBRARIES} ${Boost_LIBRARIES})
 add_dependencies(turtlesim_node turtlesim_gencpp)
 
 add_executable(turtle_teleop_key tutorials/teleop_turtle_key.cpp)
