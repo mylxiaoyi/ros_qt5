@@ -10,16 +10,14 @@ include_directories(${catkin_INCLUDE_DIRS})
 link_directories(${catkin_LIBRARY_DIRS})
 
 ## This plugin includes Qt widgets, so we must include Qt like so:
-find_package(Qt4 COMPONENTS QtCore QtGui REQUIRED)
-include(${QT_USE_FILE})
+find_package(Qt5 REQUIRED COMPONENTS Widgets)
 
 ## I prefer the Qt signals and slots to avoid defining "emit", "slots",
 ## etc because they can conflict with boost signals, so define QT_NO_KEYWORDS here.
-add_definitions(-DQT_NO_KEYWORDS)
 
 ## Here we specify which header files need to be run through "moc",
 ## Qt's meta-object compiler.
-qt4_wrap_cpp(MOC_FILES
+qt5_wrap_cpp(MOC_FILES
   src/myviz.h
 )
 
@@ -38,5 +36,5 @@ add_executable(myviz ${SOURCE_FILES})
 ## Link the myviz executable with whatever Qt libraries have been defined by
 ## the ``find_package(Qt4 ...)`` line above, and with whatever libraries
 ## catkin has included.
-target_link_libraries(myviz ${QT_LIBRARIES} default_plugin ${catkin_LIBRARIES})
+target_link_libraries(myviz ${Qt5Widgets_LIBRARIES} default_plugin ${catkin_LIBRARIES})
 ## END_TUTORIAL
