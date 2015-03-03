@@ -38,6 +38,7 @@ import platform
 import signal
 import sys
 
+from colorama import Fore
 
 class Main(object):
 
@@ -351,17 +352,17 @@ class Main(object):
 
         def message_handler(self, type_, msg):
             colored_output = 'TERM' in os.environ and 'ANSI_COLORS_DISABLED' not in os.environ
-            cyan_color = '\033[36m' if colored_output else ''
-            red_color = '\033[31m' if colored_output else ''
-            reset_color = '\033[0m' if colored_output else ''
+            cyan_color = Fore.CYAN if colored_output else ''
+            red_color = Fore.RED if colored_output else ''
+            reset_color = Fore.RESET if colored_output else ''
             if type_ == QtDebugMsg and self._options.verbose:
                 print(msg, file=sys.stderr)
             elif type_ == QtWarningMsg:
-                print(cyan_color + msg + reset_color, file=sys.stderr)
+                print(cyan_color + msg.decode('utf-8') + reset_color, file=sys.stderr)
             elif type_ == QtCriticalMsg:
-                print(red_color + msg + reset_color, file=sys.stderr)
+                print(red_color + msg.decode('utf-8') + reset_color, file=sys.stderr)
             elif type_ == QtFatalMsg:
-                print(red_color + msg + reset_color, file=sys.stderr)
+                print(red_color + msg.decode('utf-8') + reset_color, file=sys.stderr)
                 sys.exit(1)
         qInstallMessageHandler(message_handler)
 
@@ -508,7 +509,7 @@ class Main(object):
             elif len(plugins) > 1:
                 print('qt_gui_main() found multiple plugins matching "%s"\n%s' % (plugin, '\n'.join(plugins.values())))
                 return 1
-            plugin = plugins.keys()[0]
+            plugin = list(plugins.keys())[0]
 
         qDebug('QtBindingHelper using %s' % QT_BINDING)
 

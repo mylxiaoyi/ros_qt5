@@ -31,12 +31,12 @@
 #*  LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
 #*  ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 #*  POSSIBILITY OF SUCH DAMAGE.
-#* 
+#*
 #* Author: Eitan Marder-Eppstein
 #***********************************************************
 from tf2_py import *
-from buffer_interface import *
-from buffer import *
-from buffer_client import *
-from transform_listener import *
-from transform_broadcaster import *
+from .buffer_interface import *
+from .buffer import *
+from .buffer_client import *
+from .transform_listener import *
+from .transform_broadcaster import *

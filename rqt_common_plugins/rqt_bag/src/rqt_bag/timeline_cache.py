@@ -32,7 +32,7 @@
 
 
 import bisect
-import Queue
+import queue
 import threading
 import time
 
@@ -52,7 +52,7 @@ class TimelineCache(threading.Thread):
         self.last_accessed = {}  # topic -> [(access time, timestamp), ...]
         self.item_access = {}  # topic -> timestamp -> access time
         self.max_cache_size = max_cache_size  # max number of items to cache (per topic)
-        self.queue = Queue.Queue()
+        self.queue = queue.Queue()
         self.setDaemon(True)
         self.start()
 

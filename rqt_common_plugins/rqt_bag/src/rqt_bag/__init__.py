@@ -30,8 +30,8 @@
 # ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-import bag_helper
-from plugins.message_view       import MessageView
-from plugins.topic_message_view import TopicMessageView
-from plugins.timeline_renderer  import TimelineRenderer
-from timeline_cache            import TimelineCache
+from . import bag_helper
+from .plugins.message_view       import MessageView
+from .plugins.topic_message_view import TopicMessageView
+from .plugins.timeline_renderer  import TimelineRenderer
+from .timeline_cache            import TimelineCache

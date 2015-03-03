@@ -31,7 +31,7 @@
 # POSSIBILITY OF SUCH DAMAGE.
 
 import array
-from cStringIO import StringIO
+from io import StringIO
 import sys
 
 from PIL import Image
@@ -82,8 +82,8 @@ def imgmsg_to_pil(img_msg, rgba=True):
 
         return pil_img
 
-    except Exception, ex:
-        print >> sys.stderr, 'Can\'t convert image: %s' % ex
+    except Exception as ex:
+        print('Can\'t convert image: %s' % ex, file = sys.stderr)
         return None
 
 

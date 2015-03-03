@@ -65,8 +65,8 @@ struct transformer_t {
 };
 
 static PyTypeObject transformer_Type = {
-  PyObject_HEAD_INIT(&PyType_Type)
-  0,                               /*size*/
+  PyVarObject_HEAD_INIT(&PyType_Type, 0)
+  //0,                               /*size*/
   "_tf.Transformer",                /*name*/
   sizeof(transformer_t),           /*basicsize*/
 };
@@ -128,7 +128,7 @@ static PyObject *setUsingDedicatedThread(PyObject *self, PyObject *args)
     return NULL;
   tf::Transformer *t = ((transformer_t*)self)->t;
   t->setUsingDedicatedThread(value);
-  return PyString_FromString(t->allFramesAsDot().c_str());
+  return PyUnicode_FromString(t->allFramesAsDot().c_str());
 }
 
 static PyObject *getTFPrefix(PyObject *self, PyObject *args)
@@ -136,19 +136,19 @@ static PyObject *getTFPrefix(PyObject *self, PyObject *args)
   if (!PyArg_ParseTuple(args, ""))
     return NULL;
   tf::Transformer *t = ((transformer_t*)self)->t;
-  return PyString_FromString(t->getTFPrefix().c_str());
+  return PyUnicode_FromString(t->getTFPrefix().c_str());
 }
 
 static PyObject *allFramesAsDot(PyObject *self, PyObject *args)
 {
   tf::Transformer *t = ((transformer_t*)self)->t;
-  return PyString_FromString(t->allFramesAsDot().c_str());
+  return PyUnicode_FromString(t->allFramesAsDot().c_str());
 }
 
 static PyObject *allFramesAsString(PyObject *self, PyObject *args)
 {
   tf::Transformer *t = ((transformer_t*)self)->t;
-  return PyString_FromString(t->allFramesAsString().c_str());
+  return PyUnicode_FromString(t->allFramesAsString().c_str());
 }
 
 static PyObject *canTransform(PyObject *self, PyObject *args, PyObject *kw)
@@ -249,7 +249,7 @@ static PyObject *asListOfStrings(std::vector< std::string > los)
   PyObject *r = PyList_New(los.size());
   size_t i;
   for (i = 0; i < los.size(); i++) {
-    PyList_SetItem(r, i, PyString_FromString(los[i].c_str()));
+    PyList_SetItem(r, i, PyUnicode_FromString(los[i].c_str()));
   }
   return r;
 }
@@ -396,8 +396,8 @@ static PyObject *setTransform(PyObject *self, PyObject *args)
     return NULL;
   tf::StampedTransform transform;
   PyObject *header = PyObject_BorrowAttrString(py_transform, "header");
-  transform.child_frame_id_ = PyString_AsString(PyObject_BorrowAttrString(py_transform, "child_frame_id"));
-  transform.frame_id_ = PyString_AsString(PyObject_BorrowAttrString(header, "frame_id"));
+  transform.child_frame_id_ = PyBytes_AsString(PyUnicode_AsASCIIString(PyObject_BorrowAttrString(py_transform, "child_frame_id")));
+  transform.frame_id_ = PyBytes_AsString(PyUnicode_AsASCIIString(PyObject_BorrowAttrString(header, "frame_id")));
   if (rostime_converter(PyObject_BorrowAttrString(header, "stamp"), &transform.stamp_) != 1)
     return NULL;
 
@@ -471,7 +471,36 @@ static PyMethodDef module_methods[] = {
   {NULL, NULL, NULL},
 };
 
-extern "C" void init_tf()
+struct module_state {
+    PyObject* error;
+};
+
+#define GETSTATE(m) ((struct module_state*)PyModule_GetState(m))
+
+static int _tf_traverse(PyObject *m, visitproc visit, void *arg) {
+    Py_VISIT(GETSTATE(m)->error);
+    return 0;
+}
+
+static int _tf_clear(PyObject *m) {
+    Py_CLEAR(GETSTATE(m)->error);
+    return 0;
+}
+
+static struct PyModuleDef moduledef = {
+    PyModuleDef_HEAD_INIT,
+    "_tf",
+    NULL,
+    sizeof(struct module_state),
+    transformer_methods,
+    NULL,
+    _tf_traverse,
+    _tf_clear,
+    NULL
+};
+
+/* extern "C" void init_tf() */
+extern "C" PyObject* PyInit__tf()
 {
   PyObject *item, *m, *d;
 
@@ -487,7 +516,7 @@ extern "C" void init_tf()
   tf_extrapolationexception = PyString_FromString("tf.ExtrapolationException");
 #endif
 
-  pModulerospy = PyImport_Import(item= PyString_FromString("rospy")); Py_DECREF(item);
+  pModulerospy = PyImport_Import(item= PyUnicode_FromString("rospy")); Py_DECREF(item);
 
   transformer_Type.tp_alloc = PyType_GenericAlloc;
   transformer_Type.tp_new = PyType_GenericNew;
@@ -495,13 +524,27 @@ extern "C" void init_tf()
   transformer_Type.tp_flags = Py_TPFLAGS_DEFAULT | Py_TPFLAGS_BASETYPE;
   transformer_Type.tp_methods = transformer_methods;
   if (PyType_Ready(&transformer_Type) != 0)
-    return;
+    return NULL;
 
-  m = Py_InitModule("_tf", module_methods);
+  m = PyModule_Create(&moduledef);
+
+  if (m == NULL)
+      return NULL;
+
+  struct module_state *st = GETSTATE(m);
+
+  st->error = PyErr_NewException("_tf.Error", NULL, NULL);
+  if (st->error == NULL) {
+      Py_DECREF(m);
+      return NULL;
+  }
+
   PyModule_AddObject(m, "Transformer", (PyObject *)&transformer_Type);
   d = PyModule_GetDict(m);
   PyDict_SetItemString(d, "Exception", tf_exception);
   PyDict_SetItemString(d, "ConnectivityException", tf_connectivityexception);
   PyDict_SetItemString(d, "LookupException", tf_lookupexception);
   PyDict_SetItemString(d, "ExtrapolationException", tf_extrapolationexception);
+
+  return m;
 }

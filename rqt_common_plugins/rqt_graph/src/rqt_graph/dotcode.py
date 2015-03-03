@@ -480,7 +480,7 @@ class RosGraphDotcodeGenerator:
 
         ACTION_TOPICS_SUFFIX = '/action_topics'
         namespace_clusters = {}
-        for n in (nt_nodes or []) + [action_prefix + ACTION_TOPICS_SUFFIX for (action_prefix, _) in action_nodes.items()]:
+        for n in list((nt_nodes or [])) + [action_prefix + ACTION_TOPICS_SUFFIX for (action_prefix, _) in action_nodes.items()]:
             # cluster topics with same namespace
             if (cluster_namespaces_level > 0 and
                 str(n).count('/') > 1 and

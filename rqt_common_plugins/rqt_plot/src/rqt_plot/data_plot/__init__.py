@@ -37,21 +37,22 @@ from qt_gui_py_common.simple_settings_dialog import SimpleSettingsDialog
 from python_qt_binding.QtCore import Qt, qDebug, qWarning, Signal
 from python_qt_binding.QtWidgets import QWidget, QHBoxLayout
 from python_qt_binding.QtGui import QColor
+from python_qt_binding import QT_BINDING
 
 try:
-    from pyqtgraph_data_plot import PyQtGraphDataPlot
+    from .pyqtgraph_data_plot import PyQtGraphDataPlot
 except ImportError:
     qDebug('[DEBUG] rqt_plot.plot: import of PyQtGraphDataPlot failed (trying other backends)')
     PyQtGraphDataPlot = None
 
 try:
-    from mat_data_plot import MatDataPlot
+    from .mat_data_plot import MatDataPlot
 except ImportError:
     qDebug('[DEBUG] rqt_plot.plot: import of MatDataPlot failed (trying other backends)')
     MatDataPlot = None
 
 try:
-    from qwt_data_plot import QwtDataPlot
+    from .qwt_data_plot import QwtDataPlot
 except ImportError:
     qDebug('[DEBUG] rqt_plot.plot: import of QwtDataPlot failed (trying other backends)')
     QwtDataPlot = None

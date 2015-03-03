@@ -163,7 +163,7 @@ def _get_action_class(type_str, message_type, reload_on_error=False):
         if base_type == 'Header':
             package = 'std_msgs'
         else:
-            raise ValueError("message type is missing package name: %s" % 
+            raise ValueError("message type is missing package name: %s" %
                              str(message_type))
     pypkg = val = None
     try:
@@ -557,7 +557,7 @@ def init_rosaction_proto():
         yaml.representer.BaseRepresenter.represent_mapping = represent_ordered_mapping
         yaml.representer.Representer.add_representer(collections.OrderedDict,
                                                      yaml.representer.SafeRepresenter.represent_dict)
-    
+
 def rosaction_cmd_prototype(args):
     init_rosaction_proto()
     parser = OptionParser(usage="usage: rosactionproto msg/srv [options]",
@@ -589,7 +589,7 @@ def rosaction_cmd_prototype(args):
         field_filter = None
         if options.exclude_slots != None and options.exclude_slots.strip() != "":
             field_filter = create_names_filter(options.exclude_slots.split(','))
-    
+
         # possible extentions: options for
         # - target language
         # - initial values for standard types
@@ -613,7 +613,7 @@ def rosaction_cmd_prototype(args):
                 raise ROSActionProtoException("Unknown message name %s" % message_type)
             else:
                 message_type = results[0]
-    
+
         if mode == MODE_ACTION:
             msg_class = roslib.message.get_message_class(message_type)
             if (msg_class == None):
@@ -640,7 +640,7 @@ def rosaction_cmd_prototype(args):
     #     if not options.silent:
     #         print(file=sys.stderr, "Invalid package: '%s'"%e)
     #         sys.exit(getattr(os, 'EX_USAGE', 1))
-    except ValueError, e:
+    except ValueError as e:
         if not options.silent:
             sys.stderr.write("Invalid type: '%s'" % e)
             sys.exit(getattr(os, 'EX_USAGE', 1))
@@ -700,7 +700,7 @@ def get_msg_text(type_, raw=False, rospack=None):
         genmsg.load_depends(context, spec, search_path)
     except Exception as e:
         raise ROSActionException("Unable to load msg [%s]: %s" % (type_, e))
-    
+
     if raw:
         return spec.text
     else:
@@ -727,7 +727,7 @@ def rosaction_search(rospack, mode, base_type):
             yield genmsg.resource_name(p, base_type)
 
 def _stdin_arg(parser, full):
-    options, args = parser.parse_args(sys.argv[2:])    
+    options, args = parser.parse_args(sys.argv[2:])
     # read in args from stdin pipe if not present
     if not args:
         arg = None
@@ -738,7 +738,7 @@ def _stdin_arg(parser, full):
         if len(args) > 1:
             parser.error("you may only specify one %s" % full)
         return options, args[0]
-    
+
 def rosaction_cmd_show(mode, full):
     cmd = "ros%s" % (mode[1:])
     parser = OptionParser(usage="usage: %s show [options] <%s>" % (cmd, full))
@@ -780,14 +780,14 @@ def rosaction_md5(mode, type_):
         if mode == MODE_ACTION:
             msg_class = roslib.message.get_message_class(type_)
         else:
-            msg_class = roslib.message.get_service_class(type_)            
+            msg_class = roslib.message.get_service_class(type_)
     except ImportError:
         raise IOError("cannot load [%s]" % (type_))
     if msg_class is not None:
         return msg_class._md5sum
     else:
-        raise IOError("cannot load [%s]" % (type_))        
-    
+        raise IOError("cannot load [%s]" % (type_))
+
 def rosaction_cmd_md5(mode, full):
     parser = OptionParser(usage="usage: ros%s md5 <%s>" % (mode[1:], full))
     options, arg = _stdin_arg(parser, full)
@@ -809,7 +809,7 @@ def rosaction_cmd_md5(mode, full):
                 print("Cannot locate [%s]" % found, file=sys.stderr)
         if not matches:
             print("No messages matching the name [%s]" % arg, file=sys.stderr)
-                
+
 def rosaction_cmd_package(mode, full):
     parser = OptionParser(usage="usage: ros%s package <package>" % mode[1:])
     parser.add_option("-s",
@@ -820,7 +820,7 @@ def rosaction_cmd_package(mode, full):
     if options.single_line:
         joinstring = ' '
     print(joinstring.join(list_types(arg, mode=mode)))
-    
+
 def rosaction_cmd_packages(mode, full, argv=None):
     if argv is None:
         argv = sys.argv[1:]

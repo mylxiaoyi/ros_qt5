@@ -34,7 +34,7 @@ from PIL import Image
 from PIL.ImageQt import ImageQt
 
 from rqt_bag import TopicMessageView
-import image_helper
+from . import image_helper
 
 from python_qt_binding.QtWidgets import QGraphicsScene, QGraphicsView
 from python_qt_binding.QtGui import QPixmap

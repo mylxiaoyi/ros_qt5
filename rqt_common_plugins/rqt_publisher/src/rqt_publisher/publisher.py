@@ -194,9 +194,9 @@ class Publisher(Plugin):
                 self._fill_message_slots(publisher_info['message_instance'], publisher_info['topic_name'], publisher_info['expressions'], publisher_info['counter'])
                 try:
                     publisher_info['message_instance']._check_types()
-                except Exception, e:
+                except Exception as e:
                     error_str = str(e)
-                    print 'serialization error:', error_str
+                    print('serialization error:', error_str)
                     if old_expression is not None:
                         publisher_info['expressions'][topic_name] = old_expression
                     else:
@@ -223,7 +223,7 @@ class Publisher(Plugin):
 
         base_message_type = roslib.message.get_message_class(base_type_str)
         if base_message_type is None:
-            print 'Could not create message of type "%s".' % base_type_str
+            print('Could not create message of type "%s".' % base_type_str)
             return None
 
         if array_size is not None:

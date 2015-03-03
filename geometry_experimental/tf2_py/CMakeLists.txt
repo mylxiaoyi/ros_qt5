@@ -10,7 +10,7 @@ find_package(catkin REQUIRED COMPONENTS rospy tf2)
 # find_package(Boost REQUIRED COMPONENTS system)
 
 
-find_package(PythonLibs 2 REQUIRED)
+find_package(PythonLibs 3.3 REQUIRED)
 include_directories(${PYTHON_INCLUDE_PATH} ${catkin_INCLUDE_DIRS})
 
 ## Uncomment this if the package has a setup.py. This macro ensures

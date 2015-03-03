@@ -79,7 +79,7 @@ class RqtRoscommUtil(object):
                                                                          msg))
         except RLException:
             raise
-        except Exception, e:
+        except Exception as e:
             rospy.logerr("load_parameters: unable to set params " +
                          "(last param was [{}]): {}".format(param, e))
             raise  # re-raise as this is fatal
@@ -98,7 +98,7 @@ class RqtRoscommUtil(object):
                                                 "%s" % (msg))
         except RLException:
             raise
-        except Exception, e:
+        except Exception as e:
             print("load_parameters: unable to set params (last param was " +
                   "[%s]): %s" % (param, e))
             raise  # re-raise as this is fatal

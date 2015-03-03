@@ -23,12 +23,12 @@
 # ===================================================================================
 
  
-set(OCTOMAP_INCLUDE_DIRS "/home/mylxiaoyi/source/ros_catkin_ws.py3/src/octomap/octomap/include")
-set(OCTOMAP_LIBRARY_DIRS "/home/mylxiaoyi/source/ros_catkin_ws.py3/src/octomap/octomap/lib")
+set(OCTOMAP_INCLUDE_DIRS "/home/mylxiaoyi/ros_catkin_ws.qt5/src/octomap/octomap/include")
+set(OCTOMAP_LIBRARY_DIRS "/home/mylxiaoyi/ros_catkin_ws.qt5/src/octomap/octomap/lib")
  
 
 # Set library names as absolute paths:
 set(OCTOMAP_LIBRARIES
-  "/home/mylxiaoyi/source/ros_catkin_ws.py3/src/octomap/octomap/lib/liboctomap.so"
-  "/home/mylxiaoyi/source/ros_catkin_ws.py3/src/octomap/octomap/lib/liboctomath.so"
+  "/home/mylxiaoyi/ros_catkin_ws.qt5/src/octomap/octomap/lib/liboctomap.so"
+  "/home/mylxiaoyi/ros_catkin_ws.qt5/src/octomap/octomap/lib/liboctomath.so"
 )

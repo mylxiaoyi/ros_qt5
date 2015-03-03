@@ -1,9 +1,9 @@
 # Copyright (c) 2008, Willow Garage, Inc.
 # All rights reserved.
-# 
+#
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
-# 
+#
 #     * Redistributions of source code must retain the above copyright
 #       notice, this list of conditions and the following disclaimer.
 #     * Redistributions in binary form must reproduce the above copyright
@@ -12,7 +12,7 @@
 #     * Neither the name of the Willow Garage, Inc. nor the names of its
 #       contributors may be used to endorse or promote products derived from
 #       this software without specific prior written permission.
-# 
+#
 # THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
 # AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -47,33 +47,33 @@ class BufferInterface:
             return res
 
         return convert(res, new_type)
-    
+
     # transform, advanced api
     def transform_full(self, object_stamped, target_frame, target_time, fixed_frame, timeout=rospy.Duration(0.0), new_type = None):
         do_transform = self.registration.get(type(object_stamped))
         res = do_transform(object_stamped, self.lookup_transform_full(target_frame, target_time,
-                                                                     object_stamped.header.frame_id, object_stamped.header.stamp, 
+                                                                     object_stamped.header.frame_id, object_stamped.header.stamp,
                                                                      fixed_frame, timeout))
         if new_type == None:
             return res
 
         return convert(res, new_type)
 
-    # lookup, simple api 
+    # lookup, simple api
     def lookup_transform(self, target_frame, source_frame, time, timeout=rospy.Duration(0.0)):
-        raise NotImplementedException()        
+        raise NotImplementedException()
 
-    # lookup, advanced api 
+    # lookup, advanced api
     def lookup_transform_full(self, target_frame, target_time, source_frame, source_time, fixed_frame, timeout=rospy.Duration(0.0)):
-        raise NotImplementedException()        
+        raise NotImplementedException()
 
     # can, simple api
     def can_transform(self, target_frame, source_frame, time, timeout=rospy.Duration(0.0)):
-        raise NotImplementedException()        
-    
+        raise NotImplementedException()
+
     # can, advanced api
     def can_transform_full(self, target_frame, target_time, source_frame, source_time, fixed_frame, timeout=rospy.Duration(0.0)):
-        raise NotImplementedException()        
+        raise NotImplementedException()
 
 
 def Stamped(obj, stamp, frame_id):
@@ -93,9 +93,9 @@ class NotImplementedException(Exception):
 
 class TransformRegistration():
     __type_map = {}
-    
+
     def print_me(self):
-        print TransformRegistration.__type_map
+        print(TransformRegistration.__type_map)
 
     def add(self, key, callback):
         TransformRegistration.__type_map[key] = callback
@@ -110,7 +110,7 @@ class ConvertRegistration():
     __to_msg_map = {}
     __from_msg_map = {}
     __convert_map = {}
-    
+
     def add_from_msg(self, key, callback):
         ConvertRegistration.__from_msg_map[key] = callback
 
@@ -143,14 +143,14 @@ def convert(a, b_type):
     #check if an efficient conversion function between the types exists
     try:
         f = c.get_convert((type(a), b_type))
-        print "efficient copy"
+        print("efficient copy")
         return f(a)
     except TypeException:
         if type(a) == b_type:
-            print "deep copy"
+            print("deep copy")
             return deepcopy(a)
 
         f_to = c.get_to_msg(type(a))
         f_from = c.get_from_msg(b_type)
-        print "message copy"
+        print("message copy")
         return f_from(f_to(a))

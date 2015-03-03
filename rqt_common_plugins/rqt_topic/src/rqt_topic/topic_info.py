@@ -31,7 +31,7 @@
 # POSSIBILITY OF SUCH DAMAGE.
 
 from __future__ import division, with_statement
-from StringIO import StringIO
+from io import StringIO
 
 from python_qt_binding.QtCore import qWarning
 

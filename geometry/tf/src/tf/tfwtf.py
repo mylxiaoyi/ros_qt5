@@ -101,12 +101,12 @@ def cycle_detection(ctx):
             try:
                 current_frame = parent_id_map[current_frame]
             except KeyError:
-                break 
+                break
             if current_frame == frame:
                 errors.append("Frame %s is in a loop. It's loop has elements:\n%s"% (frame, " -> ".join(frame_list)))
                 break
-            
-            
+
+
     return errors
 
 def multiple_authority(ctx):
@@ -115,7 +115,7 @@ def multiple_authority(ctx):
     for m, stamp, callerid in _msgs:
         for t in m.transforms:
             frame_id = t.child_frame_id
-            parent_id = t.header.frame_id 
+            parent_id = t.header.frame_id
             if frame_id in authority_map and authority_map[frame_id] != callerid:
                 msg = "node [%s] publishing transform [%s] with parent [%s] already published by node [%s]"%(callerid, frame_id, parent_id, authority_map[frame_id])
                 authority_map[frame_id] = callerid
@@ -132,10 +132,10 @@ def no_msgs(ctx):
 # roswtf PLUGIN
 
 # tf_warnings and tf_errors declare the rules that we actually check
-                
+
 tf_warnings = [
   (no_msgs, "No tf messages"),
-  (rostime_delta, "Received out-of-date/future transforms:"),  
+  (rostime_delta, "Received out-of-date/future transforms:"),
 ]
 tf_errors = [
   (reparenting, "TF re-parenting contention:"),
@@ -164,23 +164,23 @@ def roswtf_plugin_online(ctx):
     # don't run plugin if tf isn't active as these checks take awhile
     if not is_tf_active():
         return
-    
-    print "running tf checks, this will take a second..."
+
+    print("running tf checks, this will take a second...")
     sub1 = rospy.Subscriber('/tf', tf.msg.tfMessage, _tf_handle)
     time.sleep(1.0)
     sub1.unregister()
-    print "... tf checks complete"    
+    print("... tf checks complete")
 
     for r in tf_warnings:
         warning_rule(r, r[0](ctx), ctx)
     for r in tf_errors:
         error_rule(r, r[0](ctx), ctx)
 
-    
+
 # currently no static checks for tf
 #def roswtf_plugin_static(ctx):
 #    for r in tf_warnings:
 #        warning_rule(r, r[0](ctx), ctx)
 #    for r in tf_errors:
 #        error_rule(r, r[0](ctx), ctx)
-        
+

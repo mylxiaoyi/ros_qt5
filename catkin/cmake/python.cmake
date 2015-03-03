@@ -32,7 +32,7 @@ else()
 endif()
 
 if(NOT WIN32)
-  set(PYTHON_INSTALL_DIR lib/python${_PYTHON_PATH_VERSION_SUFFIX}/${PYTHON_PACKAGES_DIR}
+  set(PYTHON_INSTALL_DIR lib64/python${_PYTHON_PATH_VERSION_SUFFIX}/${PYTHON_PACKAGES_DIR}
     CACHE INTERNAL "This needs to be in PYTHONPATH when 'setup.py install' is called.  And it needs to match.  But setuptools won't tell us where it will install things.")
 else()
   # Windows setuptools installs to lib/site-packages not lib/python2.7/site-packages
