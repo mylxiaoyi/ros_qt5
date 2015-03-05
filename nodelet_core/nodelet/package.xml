@@ -1,6 +1,6 @@
 <package>
   <name>nodelet</name>
-  <version>1.9.0</version>
+  <version>1.9.2</version>
   <description>
     The nodelet package is designed to provide a way to run multiple
     algorithms in the same process with zero copy transport between
@@ -21,6 +21,7 @@
 
   <build_depend>bondcpp</build_depend>
   <build_depend>boost</build_depend>
+  <build_depend version_gte="0.3.2">cmake_modules</build_depend>
   <build_depend>message_generation</build_depend>
   <build_depend version_gte="1.10.0">pluginlib</build_depend>
   <build_depend>rosconsole</build_depend>

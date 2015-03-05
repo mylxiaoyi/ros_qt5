@@ -187,7 +187,6 @@ target_link_libraries(${PROJECT_NAME}
   ${catkin_LIBRARIES}
   ${OGRE_OV_LIBRARIES_ABS}
   ${OPENGL_LIBRARIES}
-  #${QT_LIBRARIES}
   ${Qt5OpenGL_LIBRARIES}
   ${rviz_ADDITIONAL_LIBRARIES}
   assimp

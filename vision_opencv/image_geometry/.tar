@@ -1,2 +1,2 @@
-{!!python/unicode 'url': 'https://github.com/ros-gbp/vision_opencv-release/archive/release/indigo/image_geometry/1.11.5-0.tar.gz',
-  !!python/unicode 'version': vision_opencv-release-release-indigo-image_geometry-1.11.5-0}
+{url: 'https://github.com/ros-gbp/vision_opencv-release/archive/release/indigo/image_geometry/1.11.5-0.tar.gz',
+  version: vision_opencv-release-release-indigo-image_geometry-1.11.5-0}

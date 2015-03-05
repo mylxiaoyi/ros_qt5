@@ -10,10 +10,11 @@ include_directories(${catkin_INCLUDE_DIRS})
 link_directories(${catkin_LIBRARY_DIRS})
 
 ## This plugin includes Qt widgets, so we must include Qt like so:
-find_package(Qt5 REQUIRED COMPONENTS Widgets)
+find_package(Qt5 COMPONENTS Widgets REQUIRED)
 
 ## I prefer the Qt signals and slots to avoid defining "emit", "slots",
 ## etc because they can conflict with boost signals, so define QT_NO_KEYWORDS here.
+#add_definitions(-DQT_NO_KEYWORDS)
 
 ## Here we specify which header files need to be run through "moc",
 ## Qt's meta-object compiler.

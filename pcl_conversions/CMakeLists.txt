@@ -3,7 +3,6 @@ project(pcl_conversions)
 
 find_package(catkin REQUIRED COMPONENTS pcl_msgs roscpp sensor_msgs std_msgs cmake_modules)
 
-set(PCL_DIR "/opt/pcl/share/pcl-1.7")
 find_package(PCL REQUIRED QUIET COMPONENTS common)
 find_package(Eigen REQUIRED)
 

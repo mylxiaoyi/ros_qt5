@@ -198,7 +198,7 @@ const Ogre::AxisAlignedBox& PointCloud::getBoundingBox() const
   return bounding_box_;
 }
 
-float PointCloud::getBoundingRadius() const
+Ogre::Real PointCloud::getBoundingRadius() const
 {
   return bounding_radius_;
 }
@@ -577,7 +577,7 @@ void PointCloud::addPoints(Point* points, uint32_t num_points)
     }
 
     aabb.merge(p.position);
-    bounding_radius_ = std::max( bounding_radius_, p.position.squaredLength() );
+    bounding_radius_ = std::max( (Ogre::Real)bounding_radius_, p.position.squaredLength() );
 
     float x = p.position.x;
     float y = p.position.y;
@@ -660,7 +660,7 @@ void PointCloud::popPoints(uint32_t num_points)
   {
     Point& p = points_[i];
     bounding_box_.merge(p.position);
-    bounding_radius_ = std::max(bounding_radius_, p.position.squaredLength());
+    bounding_radius_ = std::max((Ogre::Real)bounding_radius_, p.position.squaredLength());
   }
 
   shrinkRenderables();

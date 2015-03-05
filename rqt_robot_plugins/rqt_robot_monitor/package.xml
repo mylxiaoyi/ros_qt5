@@ -1,6 +1,6 @@
 <package>
   <name>rqt_robot_monitor</name>
-  <version>0.3.7</version>
+  <version>0.4.0</version>
   <description>rqt_robot_monitor displays diagnostics_agg topics messages that
    are published by <a href = "http://www.ros.org/wiki/diagnostic_aggregator">diagnostic_aggregator</a>.
    rqt_robot_monitor is a direct port to rqt of
@@ -16,7 +16,7 @@
 
   Currently re-usable API to other pkgs are not explicitly provided.
   </description>
-  <maintainer email="130s@alumni.smu.edu">Isaac Saito</maintainer>
+  <maintainer email="namniart@gmail.com">Austin Hendrix</maintainer>
 
   <license>BSD</license>
 
@@ -24,6 +24,7 @@
   <url type="repository">https://github.com/ros-visualization/rqt_robot_plugins/rqt_robot_monitor</url>
   <url type="bugtracker">https://github.com/ros-visualization/rqt_robot_plugins/issues</url>
 
+  <author>Austin Hendrix</author>
   <author>Isaac Saito</author>
   <author>Ze'ev Klapow</author>
   <author>Kevin Watts</author>
@@ -40,9 +41,11 @@
   <run_depend>rqt_py_common</run_depend>
   <run_depend>rqt_gui</run_depend>
   <run_depend>rqt_gui_py</run_depend>
+  <run_depend>rqt_bag</run_depend>
 
   <export>
     <rqt_gui plugin="${prefix}/plugin.xml" />
+    <rqt_bag plugin="${prefix}/bag_plugin.xml" />
   </export>
 </package>
 

@@ -1,0 +1,16 @@
+/home/mylxiaoyi/ros_catkin_ws/src/osrf-sdformat-3b14107b84ed/build/test/integration/CMakeFiles/INTEGRATION_audio.dir
+/home/mylxiaoyi/ros_catkin_ws/src/osrf-sdformat-3b14107b84ed/build/test/integration/CMakeFiles/INTEGRATION_cfm_damping_implicit_spring_damper.dir
+/home/mylxiaoyi/ros_catkin_ws/src/osrf-sdformat-3b14107b84ed/build/test/integration/CMakeFiles/INTEGRATION_fixed_joint_reduction.dir
+/home/mylxiaoyi/ros_catkin_ws/src/osrf-sdformat-3b14107b84ed/build/test/integration/CMakeFiles/INTEGRATION_joint_axis_frame.dir
+/home/mylxiaoyi/ros_catkin_ws/src/osrf-sdformat-3b14107b84ed/build/test/integration/CMakeFiles/INTEGRATION_plugin_attribute.dir
+/home/mylxiaoyi/ros_catkin_ws/src/osrf-sdformat-3b14107b84ed/build/test/integration/CMakeFiles/INTEGRATION_provide_feedback.dir
+/home/mylxiaoyi/ros_catkin_ws/src/osrf-sdformat-3b14107b84ed/build/test/performance/CMakeFiles/PERFORMANCE_parser_urdf.dir
+/home/mylxiaoyi/ros_catkin_ws/src/osrf-sdformat-3b14107b84ed/build/src/CMakeFiles/UNIT_Console_TEST.dir
+/home/mylxiaoyi/ros_catkin_ws/src/osrf-sdformat-3b14107b84ed/build/src/CMakeFiles/UNIT_Converter_TEST.dir
+/home/mylxiaoyi/ros_catkin_ws/src/osrf-sdformat-3b14107b84ed/build/src/CMakeFiles/UNIT_SDF_TEST.dir
+/home/mylxiaoyi/ros_catkin_ws/src/osrf-sdformat-3b14107b84ed/build/src/CMakeFiles/UNIT_parser_urdf_TEST.dir
+/home/mylxiaoyi/ros_catkin_ws/src/osrf-sdformat-3b14107b84ed/build/doc/CMakeFiles/doc.dir
+/home/mylxiaoyi/ros_catkin_ws/src/osrf-sdformat-3b14107b84ed/build/test/CMakeFiles/gtest.dir
+/home/mylxiaoyi/ros_catkin_ws/src/osrf-sdformat-3b14107b84ed/build/test/CMakeFiles/gtest_main.dir
+/home/mylxiaoyi/ros_catkin_ws/src/osrf-sdformat-3b14107b84ed/build/src/CMakeFiles/sdformat.dir
+/home/mylxiaoyi/ros_catkin_ws/src/osrf-sdformat-3b14107b84ed/build/CMakeFiles/uninstall.dir

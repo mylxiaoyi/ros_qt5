@@ -40,7 +40,6 @@ from .menu_manager import MenuManager
 from .settings import Settings
 from .settings_proxy import SettingsProxy
 
-
 class PerspectiveManager(QObject):
 
     """Manager for perspectives associated with specific sets of `Settings`."""

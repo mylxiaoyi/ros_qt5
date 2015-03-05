@@ -78,24 +78,24 @@ def parse_http_host_and_port(url):
     port due to the fact that Python only provides easy accessors in
     Python 2.5 and later. Validation checks that the protocol and host
     are set.
-    
+
     :param url: URL to parse, ``str``
     :returns: hostname and port number in URL or 80 (default), ``(str, int)``
     :raises: :exc:`ValueError` If the url does not validate
     """
     # can't use p.port because that's only available in Python 2.5
     if not url:
-        raise ValueError('not a valid URL')        
+        raise ValueError('not a valid URL')
     p = urlparse.urlparse(url)
     if not p[0] or not p[1]: #protocol and host
         raise ValueError('not a valid URL')
     if ':' in p[1]:
         hostname, port = p[1].split(':')
         port = int(port)
-    else: 
+    else:
         hostname, port = p[1], 80
     return hostname, port
-    
+
 def _is_unix_like_platform():
     """
     :returns: true if the platform conforms to UNIX/POSIX-style APIs
@@ -175,7 +175,7 @@ def is_local_address(hostname):
     if ([ip for ip in reverse_ips if (ip.startswith('127.') or ip == '::1')] != []) or (set(reverse_ips) & set(local_addresses) != set()):
         return True
     return False
-    
+
 def get_local_address():
     """
     :returns: default local IP address (e.g. eth0). May be overriden by ROS_IP/ROS_HOSTNAME/__ip/__hostname, ``str``
@@ -288,7 +288,7 @@ def create_local_xmlrpc_uri(port):
     logic of checking ROS environment variables, the known hostname,
     and local interface IP addresses to determine the best possible
     URI.
-    
+
     :param port: port that server is running on, ``int``
     :returns: XMLRPC URI, ``str``
     """
@@ -312,7 +312,7 @@ def decode_ros_handshake_header(header_str):
     header is a list of string key=value pairs, each prefixed by a
     4-byte length field. It is preceeded by a 4-byte length field for
     the entire header.
-    
+
     :param header_str: encoded header string. May contain extra data at the end, ``str``
     :returns: key value pairs encoded in \a header_str, ``{str: str}``
     """
@@ -332,11 +332,11 @@ def decode_ros_handshake_header(header_str):
         if start > size:
             raise ROSHandshakeException("Invalid line length in handshake header: %s"%size)
         line = header_str[start-field_size:start]
-        
+
         #python3 compatibility
         if python3 == 1:
             line = line.decode()
-        
+
         idx = line.find("=")
         if idx < 0:
             raise ROSHandshakeException("Invalid line in handshake header: [%s]"%line)
@@ -344,11 +344,11 @@ def decode_ros_handshake_header(header_str):
         value = line[idx+1:]
         d[key.strip()] = value
     return d
-    
+
 def read_ros_handshake_header(sock, b, buff_size):
     """
     Read in tcpros header off the socket \a sock using buffer \a b.
-    
+
     :param sock: socket must be in blocking mode, ``socket``
     :param b: buffer to use, ``StringIO`` for Python2, ``BytesIO`` for Python 3
     :param buff_size: incoming buffer size to use, ``int``
@@ -369,14 +369,14 @@ def read_ros_handshake_header(sock, b, buff_size):
             (size,) = struct.unpack('<I', bval[0:4])
             if btell - 4 >= size:
                 header_str = bval
-                    
+
                 # memmove the remnants of the buffer back to the start
                 leftovers = bval[size+4:]
                 b.truncate(len(leftovers))
                 b.seek(0)
                 b.write(leftovers)
                 header_recvd = True
-                    
+
     # process the header
     return decode_ros_handshake_header(bval)
 
@@ -391,19 +391,19 @@ def encode_ros_handshake_header(header):
 
     :param header: header field keys/values, ``dict``
     :returns: header encoded as byte string, ``str``
-    """    
+    """
     fields = ["%s=%s" % (k, header[k]) for k in sorted(header.keys())]
-    
+
     # in the usual configuration, the error 'TypeError: can't concat bytes to str' appears:
     if python3 == 0:
         #python 2
         s = ''.join(["%s%s"%(struct.pack('<I', len(f)), f) for f in fields])
         return struct.pack('<I', len(s)) + s
     else:
-        #python 3 
+        #python 3
         s = b''.join([(struct.pack('<I', len(f)) + f.encode("utf-8")) for f in fields])
         return struct.pack('<I', len(s)) + s
-                                        
+
 def write_ros_handshake_header(sock, header):
     """
     Write ROS handshake header header to socket sock
@@ -415,4 +415,4 @@ def write_ros_handshake_header(sock, header):
     s = encode_ros_handshake_header(header)
     sock.sendall(s)
     return len(s) #STATS
-    
+

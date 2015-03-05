@@ -79,7 +79,7 @@ class RosPluginProvider(PluginProvider):
             qCritical('RosPluginProvider.load(%s): raised an exception:\n%s' % (plugin_id, e))
             return None
         except Exception as e:
-            qCritical('RosPluginProvider.load(%s) exception raised in builtins.__import__(%s, [%s]):\n%s' % (plugin_id, attributes['module_name'], attributes['class_from_class_type'], traceback.format_exc()))
+            qCritical('RosPluginProvider.load(%s) exception raised in __builtin__.__import__(%s, [%s]):\n%s' % (plugin_id, attributes['module_name'], attributes['class_from_class_type'], traceback.format_exc()))
             raise e
 
         class_ref = getattr(module, attributes['class_from_class_type'], None)

@@ -49,7 +49,7 @@ import os
 import sys
 import socket
 
-from io import BytesIO # Python 3.x
+from io import BytesIO# Python 3.x
 
 import genpy
 

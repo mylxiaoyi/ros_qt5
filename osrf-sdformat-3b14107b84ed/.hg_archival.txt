@@ -1,0 +1,5 @@
+repo: 17049bd77df5bd6cd56a76edba4a54afb5647740
+node: 3b14107b84eda2962bfb51d673c236717a487057
+branch: default
+latesttag: sdformat2_2.0.1
+latesttagdistance: 12

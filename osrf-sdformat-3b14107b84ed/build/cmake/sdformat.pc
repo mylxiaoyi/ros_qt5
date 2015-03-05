@@ -1,0 +1,10 @@
+prefix=/usr
+libdir=${prefix}/lib64
+includedir=${prefix}/include
+
+Name: SDF
+Description: Robot Modeling Language (SDF)
+Version: 2.0.1
+Requires:
+Libs: -L${libdir} -lsdformat
+CFlags: -I${includedir}/sdformat-2.0

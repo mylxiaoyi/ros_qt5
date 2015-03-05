@@ -73,7 +73,7 @@ class StackageCompletionModel(QAbstractListModel):
     """Ros package and stacknames"""
     def __init__(self, linewidget, rospack, rosstack):
         super(StackageCompletionModel, self).__init__(linewidget)
-        self.allnames = sorted(list(set(rospack.list() + rosstack.list())))
+        self.allnames = sorted(list(set(list(rospack.list()) + list(rosstack.list()))))
         self.allnames = self.allnames + ['-%s' % name for name in self.allnames]
 
     def rowCount(self, parent):
@@ -151,7 +151,7 @@ class RosPackGraph(Plugin):
         self._widget.filter_line_edit.editingFinished.connect(self._refresh_rospackgraph)
         self._widget.filter_line_edit.setCompleter(completer)
         self._widget.filter_line_edit.selectionChanged.connect(self._clear_filter)
-        
+
         self._widget.with_stacks_check_box.clicked.connect(self._refresh_rospackgraph)
         self._widget.mark_check_box.clicked.connect(self._refresh_rospackgraph)
         self._widget.colorize_check_box.clicked.connect(self._refresh_rospackgraph)
@@ -178,7 +178,7 @@ class RosPackGraph(Plugin):
         self._deferred_fit_in_view.emit()
 
         context.add_widget(self._widget)
-        
+
         # If in either of following case, this turnes True
         # - 1st filtering key is already input by user
         # - filtering key is restored
@@ -206,7 +206,7 @@ class RosPackGraph(Plugin):
             _str_filter = '(Separate pkgs by comma)'
         else:
             self._filtering_started = True
-        
+
         self._widget.depth_combo_box.setCurrentIndex(int(instance_settings.value('depth_combo_box_index', 0)))
         self._widget.directions_combo_box.setCurrentIndex(int(instance_settings.value('directions_combo_box_index', 0)))
         self._widget.package_type_combo_box.setCurrentIndex(int(instance_settings.value('package_type_combo_box', 0)))
@@ -321,7 +321,7 @@ class RosPackGraph(Plugin):
                         try:
                             service_type = rosservice.get_service_type(service_name)
                             tool_tip += '\n  %s [%s]' % (service_name, service_type)
-                        except rosservice.ROSServiceIOException, e:
+                        except rosservice.ROSServiceIOException as e:
                             tool_tip += '\n  %s' % (e)
                 return tool_tip
             elif item_type == 'topic':
@@ -334,9 +334,9 @@ class RosPackGraph(Plugin):
         for item in self._scene.items():
             self._scene.removeItem(item)
         self._scene.clear()
-        for node_item in self._nodes.itervalues():
+        for node_item in self._nodes.values():
             self._scene.addItem(node_item)
-        for edge_items in self._edges.itervalues():
+        for edge_items in self._edges.values():
             for edge_item in edge_items:
                 edge_item.add_to_scene(self._scene)
 
@@ -411,7 +411,7 @@ class RosPackGraph(Plugin):
         self._scene.render(painter)
         painter.end()
         img.save(file_name)
-    
+
     def _clear_filter(self):
         if not self._filtering_started:
             self._widget.filter_line_edit.setText('')

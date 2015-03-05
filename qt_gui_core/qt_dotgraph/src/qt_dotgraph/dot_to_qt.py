@@ -117,7 +117,7 @@ class DotToQtGenerator():
         """
         # let pydot imitate pygraphviz api
         attr = {}
-        for name in node.get_attributes().iterkeys():
+        for name in node.get_attributes().keys():
             value = get_unquoted(node, name)
             attr[name] = value
         obj_dic = node.__getattribute__("obj_dict")
@@ -143,7 +143,7 @@ class DotToQtGenerator():
             # happens on Lucid pygraphviz version
             print("Error, label is None for node %s, pygraphviz version may be too old." % node)
         else:
-            name = name.decode('string_escape')
+            name = bytes(name, 'UTF-8').decode('unicode_escape')
 
         # decrease rect by one so that edges do not reach inside
         bb_width = len(name) / 5

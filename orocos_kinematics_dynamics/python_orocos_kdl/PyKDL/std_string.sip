@@ -24,7 +24,7 @@
 %ConvertFromTypeCode
     // convert an std::string to a Python (unicode) string
     PyObject* newstring;
-    newstring = PyUnicode_DecodeUTF8(sipCpp->c_str(), sipCpp->length(), NULL);
+    newstring = PyUnicode_Decode(sipCpp->c_str(), sipCpp->length(), "UTF-8", "");
     if(newstring == NULL) {
         PyErr_Clear();
         newstring = PyBytes_FromString(sipCpp->c_str());
@@ -45,8 +45,14 @@
      }
      if (PyUnicode_Check(sipPy)) {
         PyObject* s = PyUnicode_AsUTF8String(sipPy);
-        *sipCppPtr = new std::string(PyBytes_AsString(PyUnicode_AsASCIIString(s)));
+        *sipCppPtr = new
+        std::string(PyBytes_AsString(PyUnicode_AsASCIIString(s)));
         Py_DECREF(s);
+        return 1;
+     }
+     if (PyUnicode_Check(sipPy)) {
+        *sipCppPtr = new
+        std::string(PyBytes_AsString(PyUnicode_AsASCIIString(sipPy)));
         return 1;
      }
 

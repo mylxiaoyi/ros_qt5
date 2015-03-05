@@ -6,10 +6,13 @@ find_package(catkin REQUIRED COMPONENTS geometry_msgs nav_msgs roscpp rostest se
 find_package(Boost REQUIRED COMPONENTS system thread)
 
 find_package(FLTK REQUIRED)
-set(FLTK_INCLUDE_DIRS "/usr/include/fltk-1")
 
 set(Stage_DIR cmake)
 find_package(Stage REQUIRED)
+
+SET(FLTK_INCLUDE_DIRS
+    "/usr/include/fltk-1"
+)
 
 include_directories(
   ${catkin_INCLUDE_DIRS}
@@ -27,8 +30,7 @@ catkin_package(
 
 # Declare a cpp executable
 add_executable(stageros src/stageros.cpp)
-target_link_libraries(stageros ${catkin_LIBRARIES} ${Boost_LIBRARIES}
-    ${FLTK_LIBRARIES} ${Stage_LIBRARIES} "-ldl")
+target_link_libraries(stageros ${catkin_LIBRARIES} ${Boost_LIBRARIES} ${FLTK_LIBRARIES} ${Stage_LIBRARIES} "-ldl")
 if(catkin_EXPORTED_TARGETS)
 	add_dependencies(stageros ${catkin_EXPORTED_TARGETS})
 endif()

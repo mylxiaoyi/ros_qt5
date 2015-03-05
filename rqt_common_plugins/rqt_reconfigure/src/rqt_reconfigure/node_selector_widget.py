@@ -111,7 +111,8 @@ class NodeSelectorWidget(QWidget):
         # This 1 line is needed to enable horizontal scrollbar. This setting
         # isn't available in .ui file.
         # Ref. http://stackoverflow.com/a/6648906/577001
-        self._node_selector_view.header().setSectionResizeMode(QHeaderView.ResizeToContents)
+        self._node_selector_view.header().setResizeMode(
+                                              0, QHeaderView.ResizeToContents)
 
         # Setting slot for when user clicks on QTreeView.
         self.selectionModel = self._node_selector_view.selectionModel()

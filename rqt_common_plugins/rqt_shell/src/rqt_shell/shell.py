@@ -33,7 +33,7 @@
 from qt_gui.plugin import Plugin
 from qt_gui_py_common.simple_settings_dialog import SimpleSettingsDialog
 
-from shell_widget import ShellWidget
+from .shell_widget import ShellWidget
 
 try:
     from xterm_widget import XTermWidget, is_xterm_available

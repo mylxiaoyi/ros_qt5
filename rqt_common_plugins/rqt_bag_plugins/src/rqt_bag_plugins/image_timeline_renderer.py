@@ -156,11 +156,11 @@ class ImageTimelineRenderer(TimelineRenderer):
         try:
             pil_image = image_helper.imgmsg_to_pil(msg)
         except Exception as ex:
-            print('Error loading image on topic %s: %s' % (topic, str(ex)), file = sys.stderr)
+            print('Error loading image on topic %s: %s' % (topic, str(ex)), file=sys.stderr)
             pil_image = None
 
         if not pil_image:
-            print('Disabling renderer on %s' % topic, file = sys.stderr)
+            print('Disabling renderer on %s' % topic, file=sys.stderr)
             self.timeline.set_renderer_active(topic, False)
             return None, None
 
@@ -174,6 +174,6 @@ class ImageTimelineRenderer(TimelineRenderer):
             return msg_stamp, thumbnail
 
         except Exception as ex:
-            print('Error loading image on topic %s: %s' % (topic, str(ex)), file = sys.stderr)
+            print >> sys.stderr, 'Error loading image on topic %s: %s' % (topic, str(ex))
             raise
             return None, None

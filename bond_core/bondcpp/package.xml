@@ -1,6 +1,6 @@
 <package>
   <name>bondcpp</name>
-  <version>1.7.14</version>
+  <version>1.7.16</version>
   <description>
     C++ implementation of bond, a mechanism for checking when
     another process has terminated.
@@ -16,6 +16,7 @@
 
   <build_depend>bond</build_depend>
   <build_depend>boost</build_depend>
+  <build_depend version_gte="0.3.2">cmake_modules</build_depend>
   <build_depend>roscpp</build_depend>
   <build_depend>smclib</build_depend>
   <build_depend>uuid</build_depend>

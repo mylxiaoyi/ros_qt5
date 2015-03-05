@@ -181,7 +181,7 @@ public:
 
   virtual const Ogre::String& getMovableType() const { return sm_Type; }
   virtual const Ogre::AxisAlignedBox& getBoundingBox() const;
-  virtual float getBoundingRadius() const;
+  virtual Ogre::Real getBoundingRadius() const;
   virtual void getWorldTransforms( Ogre::Matrix4* xform ) const;
   virtual unsigned short getNumWorldTransforms() const { return 1; }
   virtual void _updateRenderQueue( Ogre::RenderQueue* queue );

@@ -37,7 +37,6 @@ from qt_gui_py_common.simple_settings_dialog import SimpleSettingsDialog
 from python_qt_binding.QtCore import Qt, qDebug, qWarning, Signal
 from python_qt_binding.QtWidgets import QWidget, QHBoxLayout
 from python_qt_binding.QtGui import QColor
-from python_qt_binding import QT_BINDING
 
 try:
     from .pyqtgraph_data_plot import PyQtGraphDataPlot
@@ -67,7 +66,7 @@ class DataPlot(QWidget):
     """A widget for displaying a plot of data
 
     The DataPlot widget displays a plot, on one of several plotting backends,
-    depending on which backend(s) are available at runtime. It currently 
+    depending on which backend(s) are available at runtime. It currently
     supports PyQtGraph, MatPlot and QwtPlot backends.
 
     The DataPlot widget manages the plot backend internally, and can save
@@ -200,7 +199,7 @@ class DataPlot(QWidget):
 
         self.redraw()
 
-    # interface out to the managing GUI component: get title, save, restore, 
+    # interface out to the managing GUI component: get title, save, restore,
     # etc
     def getTitle(self):
         """get the title of the current plotting backend"""
@@ -224,7 +223,7 @@ class DataPlot(QWidget):
 
         This displays a SimpleSettingsDialog asking the user to choose a
         plot type, gets the result, and updates the plot type as necessary
-        
+
         This method is blocking"""
 
         marker_settings = [
@@ -281,7 +280,7 @@ class DataPlot(QWidget):
 
         Add a curve named `curve_name` to the plot, with initial data series
         `data_x` and `data_y`.
-        
+
         Future references to this curve should use the provided `curve_id`
 
         Note that the plot is not redraw automatically; call `redraw()` to make
@@ -307,7 +306,7 @@ class DataPlot(QWidget):
 
     def update_values(self, curve_id, values_x, values_y):
         """Append new data to an existing curve
-        
+
         `values_x` and `values_y` will be appended to the existing data for
         `curve_id`
 
@@ -346,7 +345,7 @@ class DataPlot(QWidget):
         """Draw a vertical line on the plot
 
         Draw a line a position X, with the given color
-        
+
         @param x: position of the vertical line to draw
         @param color: optional parameter specifying the color, as tuple of
                       RGB values from 0 to 255
@@ -401,7 +400,7 @@ class DataPlot(QWidget):
 
             # reset the upper x_limit so that we ignore the previous position
             x_limit[1] = -numpy.inf
-            
+
             # get largest X value
             for curve_id in self._curves:
                 curve = self._curves[curve_id]
@@ -451,7 +450,7 @@ class DataPlot(QWidget):
                 #       ONLY consider data for new values; not
                 #       existing limits, or we'll add padding on top of old
                 #       padding in SCALE_EXTEND mode
-                # 
+                #
                 # pad the min/max
                 # TODO: invert this padding in get_ylim
                 #ymin = limits[0]

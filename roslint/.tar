@@ -1,2 +1,2 @@
-{!!python/unicode 'url': 'https://github.com/ros-gbp/roslint-release/archive/release/indigo/roslint/0.9.2-1.tar.gz',
-  !!python/unicode 'version': roslint-release-release-indigo-roslint-0.9.2-1}
+{url: 'https://github.com/ros-gbp/roslint-release/archive/release/indigo/roslint/0.9.2-1.tar.gz',
+  version: roslint-release-release-indigo-roslint-0.9.2-1}

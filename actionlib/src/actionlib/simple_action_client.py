@@ -33,7 +33,7 @@ import time
 import rospy
 from rospy import Header
 from actionlib_msgs.msg import *
-from action_client import ActionClient, CommState, get_name_of_constant
+from .action_client import ActionClient, CommState, get_name_of_constant
 
 class SimpleGoalState:
     PENDING = 0
@@ -203,7 +203,7 @@ class SimpleActionClient:
 
     ## @brief Cancels all goals prior to a given timestamp
     ##
-    ## This preempts all goals running on the action server for which the 
+    ## This preempts all goals running on the action server for which the
     ## time stamp is earlier than the specified time stamp
     ## this message is serviced by the ActionServer.
 

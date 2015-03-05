@@ -83,7 +83,7 @@ def imgmsg_to_pil(img_msg, rgba=True):
         return pil_img
 
     except Exception as ex:
-        print('Can\'t convert image: %s' % ex, file = sys.stderr)
+        print(sys.stderr, 'Can\'t convert image: %s' % ex, file=sys.stderr)
         return None
 
 

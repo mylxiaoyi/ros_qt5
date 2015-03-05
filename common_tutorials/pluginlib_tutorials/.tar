@@ -1,2 +1,2 @@
-{!!python/unicode 'url': 'https://github.com/ros-gbp/common_tutorials-release/archive/release/indigo/pluginlib_tutorials/0.1.7-0.tar.gz',
-  !!python/unicode 'version': common_tutorials-release-release-indigo-pluginlib_tutorials-0.1.7-0}
+{url: 'https://github.com/ros-gbp/common_tutorials-release/archive/release/indigo/pluginlib_tutorials/0.1.8-0.tar.gz',
+  version: common_tutorials-release-release-indigo-pluginlib_tutorials-0.1.8-0}

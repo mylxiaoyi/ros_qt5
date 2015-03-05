@@ -132,7 +132,6 @@ def _load_pyqt(required_modules, optional_modules):
     except ValueError as e:
         raise RuntimeError('Could not set API version (%s): did you import PyQt4 directly?' % e)
 
-
     # register required and optional PyQt4 modules
     for module_name in required_modules:
         #_named_import('PyQt4.%s' % module_name)

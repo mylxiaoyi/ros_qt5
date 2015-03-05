@@ -1,2 +1,2 @@
-{!!python/unicode 'url': 'https://github.com/ros-gbp/robot_model-release/archive/release/indigo/collada_urdf/1.11.5-0.tar.gz',
-  !!python/unicode 'version': robot_model-release-release-indigo-collada_urdf-1.11.5-0}
+{url: 'https://github.com/ros-gbp/robot_model-release/archive/release/indigo/collada_urdf/1.11.5-0.tar.gz',
+  version: robot_model-release-release-indigo-collada_urdf-1.11.5-0}

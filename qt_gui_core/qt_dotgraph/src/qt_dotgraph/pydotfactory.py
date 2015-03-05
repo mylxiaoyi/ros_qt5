@@ -53,7 +53,7 @@ class PydotFactory():
         return ret
 
     def escape_name(self, name):
-        ret = urllib.quote(name.strip())
+        ret = urllib.parse.quote(name.strip())
         ret = ret.replace('/', '_')
         ret = ret.replace('%', '_')
         ret = ret.replace('-', '_')

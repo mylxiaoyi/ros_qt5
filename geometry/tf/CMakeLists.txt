@@ -99,9 +99,9 @@ endif()
 
 
 #Python setup
-set(Python_ADDITIONAL_VERSIONS 3.3)
+set(Python_ADDITIONAL_VERSIONS 3.4)
 find_package(PythonLibs REQUIRED)
-include_directories(${PYTHON_INCLUDE_PATH})
+include_directories(${PYTHON_INCLUDE_DIRS})
 
 # # If on Darwin, create a symlink _foo.so -> _foo.dylib, because the
 # # MacPorts version of Python won't find _foo.dylib for 'import _foo'
@@ -125,7 +125,6 @@ link_libraries(${PYTHON_LIBRARIES})
 add_library(pytf_py src/pytf.cpp src/tf.cpp src/transform_listener.cpp src/cache.cpp)
 add_dependencies(pytf_py ${PROJECT_NAME}_gencpp)
 
-find_package(PythonLibs REQUIRED)
 set_target_properties(pytf_py PROPERTIES OUTPUT_NAME tf PREFIX "_" SUFFIX ".so"
   LIBRARY_OUTPUT_DIRECTORY ${CATKIN_DEVEL_PREFIX}/${PYTHON_INSTALL_DIR}/tf)
 

@@ -42,7 +42,7 @@ import textwrap
 class TopWidgetItem(QTreeWidgetItem):
     def __init__(self, parent=None):
         super(TopWidgetItem, self).__init__(parent)
-        
+
     def __lt__(self, other):
         col = self.treeWidget().sortColumn()
         dtype = Top.SORT_TYPE[col]
@@ -156,7 +156,7 @@ class Top(Plugin):
             twi.setText(col, self.FORMAT_STRS[col] % val)
         self._table_widget.insertTopLevelItem(row, twi)
 
-        for col, (key, func) in self.TOOLTIPS.iteritems():
+        for col, (key, func) in self.TOOLTIPS.items():
             twi.setToolTip(col, func(info[key]))
 
         with self._selected_node_lock:
@@ -175,7 +175,7 @@ class Top(Plugin):
     def shutdown_plugin(self):
         self._update_timer.stop()
 
-    def save_settings(self, plugin_settings, instance_settings):        
+    def save_settings(self, plugin_settings, instance_settings):
         instance_settings.set_value('filter_text', self._filter_box.text())
         instance_settings.set_value('is_regex', int(self._regex_box.checkState()))
 

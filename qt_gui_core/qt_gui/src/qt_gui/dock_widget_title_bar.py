@@ -90,11 +90,7 @@ class DockWidgetTitleBar(QWidget):
         self._dock_widget.installEventFilter(self)
 
     def __del__(self):
-        if self._dock_widget is None:
-            print('Bad')
-        else:
-            print('Not None')
-            self._dock_widget.removeEventFilter(self)
+        self._dock_widget.removeEventFilter(self)
 
     def connect_button(self, button_id, callback):
         button = self._extra_buttons.get(button_id, None)

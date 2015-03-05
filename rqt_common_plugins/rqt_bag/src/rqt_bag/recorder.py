@@ -160,7 +160,7 @@ class Recorder(object):
 
                         self._subscriber_helpers[topic] = _SubscriberHelper(self, topic, pytype)
                     except Exception as ex:
-                        print('Error subscribing to %s (ignoring): %s' % (topic, str(ex)), file = sys.stderr)
+                        print >> sys.stderr, 'Error subscribing to %s (ignoring): %s' % (topic, str(ex))
                         self._failed_topics.add(topic)
 
                 # Wait a while
@@ -168,7 +168,7 @@ class Recorder(object):
                 self._stop_condition.wait(self._master_check_interval)
 
         except Exception as ex:
-            print('Error recording to bag: %s' % str(ex), file = sys.stderr)
+            print >> sys.stderr, 'Error recording to bag: %s' % str(ex)
 
         # Unsubscribe from all topics
         for topic in list(self._subscriber_helpers.keys()):
@@ -178,7 +178,7 @@ class Recorder(object):
         try:
             self._bag.close()
         except Exception as ex:
-            print('Error closing bag [%s]: %s' % (self._bag.filename, str(ex)), file = sys.stderr)
+            print >> sys.stderr, 'Error closing bag [%s]: %s' % (self._bag.filename, str(ex))
 
     def _should_subscribe_to(self, topic):
         if self._all:
@@ -233,7 +233,7 @@ class Recorder(object):
                     listener(topic, m, t)
 
         except Exception as ex:
-            print('Error write to bag: %s' % str(ex), file = sys.stderr)
+            print >> sys.stderr, 'Error write to bag: %s' % str(ex)
 
 
 class _SubscriberHelper(object):
