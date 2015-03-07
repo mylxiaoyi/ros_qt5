@@ -70,6 +70,7 @@ class ParamWidget(QWidget):
         'param', expecting all the parameters will become handle-able.
         """
 
+        print("\nin param_widget.__init__")
         super(ParamWidget, self).__init__()
         self.setObjectName(self._TITLE_PLUGIN)
         self.setWindowTitle(self._TITLE_PLUGIN)
@@ -98,6 +99,7 @@ class ParamWidget(QWidget):
         _hlayout_filter.addWidget(self.filter_lineedit)
         _hlayout_filter_widget.setLayout(_hlayout_filter)
         self._nodesel_widget = NodeSelectorWidget(self, rp, self.sig_sysmsg)
+        print("end param_widget.__init__")
         _vlayout_nodesel_side.addWidget(_hlayout_filter_widget)
         _vlayout_nodesel_side.addWidget(self._nodesel_widget)
         _vlayout_nodesel_side.setSpacing(1)

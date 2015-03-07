@@ -147,8 +147,8 @@ def _load_pyqt(required_modules, optional_modules):
 
     # try to register PyQt4.Qwt5 module
     try:
-        import PyQt4.Qwt5
-        _register_binding_module('Qwt', PyQt4.Qwt5)
+        import PyQt5.Qwt5
+        _register_binding_module('Qwt', PyQt5.Qwt5)
     except ImportError:
         pass
 
