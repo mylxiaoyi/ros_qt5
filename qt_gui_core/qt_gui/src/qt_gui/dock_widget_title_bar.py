@@ -90,7 +90,12 @@ class DockWidgetTitleBar(QWidget):
         self._dock_widget.installEventFilter(self)
 
     def __del__(self):
-        self._dock_widget.removeEventFilter(self)
+        # if uncomment following code, when close rqt widget with plugin widget,
+        # it will throw runtime error: wrap c/c++ widget has been deleted
+        # according qt help manual, when widget has destroyed, all installed
+        # event filters will be remove automatically, so may be it is safe to do so
+        #self._dock_widget.removeEventFilter(self)
+        pass
 
     def connect_button(self, button_id, callback):
         button = self._extra_buttons.get(button_id, None)
