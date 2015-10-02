@@ -41,7 +41,9 @@
 
 #include <ros/assert.h>
 
-#define MAX_ELEMENTS (65536/4)
+// edited by mylxiaoyi
+//#define MAX_ELEMENTS (65536/4)
+#define MAX_ELEMENTS 65536
 
 namespace rviz
 {
